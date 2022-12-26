@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from auth import urls as auth_urls
+from users import urls as users_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api_schema/', SpectacularAPIView.as_view(), name='schema'),
     path('swagger-ui/',
          SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/', include(auth_urls))
+    path('api/', include(auth_urls)),
+    path('users/', include(users_urls)),
 ]
