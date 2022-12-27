@@ -81,16 +81,16 @@ class RegistrationSerializer(serializers.Serializer):
             res['details'] = 'That user already exists.'
             return res
         user_gender = additional_data.pop('gender')
-       # try:
-        role = Roles.objects.get(name__icontains='user')
-        AdditionalUserData.objects.create(
-            **additional_data, user=user_model, role_id=role, gender_id=Gender.objects.filter(
-                name__icontains=user_gender['name']).first().id, date_registred=datetime.now(), created_at=datetime.now())
-        """except:
+        try:
+            role = Roles.objects.get(name__icontains='user')
+            AdditionalUserData.objects.create(
+                **additional_data, user=user_model, role_id=role, gender_id=Gender.objects.filter(
+                    name__icontains=user_gender['name']).first().id, date_registred=datetime.now(), created_at=datetime.now())
+        except:
             res['error'] = 1
             res['status'] = 400
             res['details'] = 'There was a problem with a roles.'
-            return res"""
+            return res
 
         res = {
             'error': 0,
