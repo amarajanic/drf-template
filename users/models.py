@@ -17,7 +17,7 @@ class Roles(models.Model):
         default=USER,
     )
     created_at = models.DateTimeField(datetime.datetime.now())
-    modified_at = models.DateTimeField(blank=True)
+    modified_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -39,7 +39,7 @@ class Gender(models.Model):
         choices=GENDER_CHOICES,
     )
     created_at = models.DateTimeField(datetime.datetime.now())
-    modified_at = models.DateTimeField(blank=True)
+    modified_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -59,7 +59,7 @@ class AdditionalUserData(models.Model):
         Gender, blank=False, on_delete=models.DO_NOTHING)
     date_registred = models.DateTimeField(datetime.datetime.now())
     created_at = models.DateTimeField(datetime.datetime.now())
-    modified_at = models.DateTimeField(blank=True)
+    modified_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f'user: {self.user}\npicture_url: {self.profile_picture_url}\nrole: {self.role_id}'
