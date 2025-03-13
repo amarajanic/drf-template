@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-j5a$rj3ffd(_sal6iw%+^o1as4p_fi*sb*^&z2m^rdv!1%wrrf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['amar-recipe-api.azurewebsites.net']
 
 
 # Application definition
