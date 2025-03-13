@@ -1,0 +1,9 @@
+Django
+djangorestframework
+psycopg2
+drf-spectacular
+Pillow
+dotenv
+rest_framework_simplejwt
+djangorestframework-simplejwt
+drf-extra-fields
