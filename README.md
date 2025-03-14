@@ -1,0 +1,1 @@
+Django Rest Framework Template with CICD connecting to Azure (Web App + Database)
