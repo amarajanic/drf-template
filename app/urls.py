@@ -14,10 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.db import OperationalError, connection
 from django.urls import path, include
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from auth import urls as auth_urls
 from users import urls as users_urls
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from drf_spectacular.utils import extend_schema
+
+
+@extend_schema(responses={200: 'Health check OK', 503: 'Service Unavailable'})
+@api_view(['GET'])
+def health_check(request):
+    try:
+        connection.ensure_connection()
+        return JsonResponse({'status': 'ok'})
+    except OperationalError:
+        return JsonResponse({'status': 'error', 'details': 'Database is down'}, status=500)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +41,9 @@ urlpatterns = [
          SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/', include(auth_urls)),
     path('users/', include(users_urls)),
+    path('health-check/', health_check, name='health-check'),
 ]
+
+
+
+
